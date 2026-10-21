@@ -11,9 +11,9 @@
 ## 最新案:にちはらん
 
 新田さん提供のキャラクター案(2026-10-21、`mascot/nichiharan/reference-v2.webp`)を、**絵の形を変えずに**サイトで使う。
-原画から3体を切り出し、**帽子のスリットの中に金の星と白い星粒を描き足す**だけにしている(描き直すと体型が変わってしまうため)。
+原画から3体を切り出し、**帽子のスリットの中に金の星と白い星粒を描き足し、スカーフを日原天文台の建物の黄色(#F0AA1E)に塗り替える**だけにしている(描き直すと体型が変わってしまうため)。
 
-- 作り直し:`python3 docs/mascot/nichiharan-from-reference.py public/images/nichiharan`(星の位置は同ファイルの `FIGURES`)
+- 作り直し:`python3 docs/mascot/nichiharan-from-reference.py public/images/nichiharan`(星の位置とスカーフの範囲は同ファイルの `FIGURES`)
 - キャッチコピー「いっしょに、宇宙をのぞこ!」、口ぐせ「今日は晴れるかなぁ」(新田さん指定)
 
 ![にちはらん](mascot/nichiharan/sheet.png)

@@ -1,6 +1,7 @@
 """
 にちはらんのサイト用画像を、新田さん提供の原画(docs/mascot/nichiharan/reference-v2.webp)から切り出す。
-絵の形は変えず、帽子のスリットの中に金の星と星粒を描き足すだけにする。
+絵の形は変えず、帽子のスリットの中に金の星と星粒を描き足し、スカーフ(襟)を日原天文台の建物の黄色に塗り替える。
+スカーフは紺のふち線を残し、中だけを塗る。
 
   python3 docs/mascot/nichiharan-from-reference.py <出力フォルダ>
   → wave.png telescope.png cheer.png hareru.png(背景は原画と同じ生成り色)
@@ -11,28 +12,33 @@ import math
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 SRC = Path(__file__).parent / 'nichiharan' / 'reference-v2.webp'
 GOLD = (210, 170, 88)
 WHITE = (255, 255, 255)
 BG = (253, 252, 245)
+# 日原天文台の建物の黄色(昼の写真 public/images/dome-day.jpg の外壁から)
+YELLOW = (240, 170, 30)
 SS = 4  # なめらかに描くための拡大率
 
 # 原画の中の位置(px)。box は切り出す範囲、stars は (x, y, 半径)、dots は白い星粒 (x, y, 半径)
 FIGURES = {
     'wave': {
         'box': (128, 206, 806, 915),
+        'scarf': (300, 585, 760, 675),
         'stars': [(555, 274, 19), (573, 342, 12)],
         'dots': [(583, 246, 2.6), (543, 308, 3), (592, 314, 2.2), (556, 368, 2.8), (598, 372, 2)],
     },
     'telescope': {
         'box': (970, 40, 1455, 490),
+        'scarf': (1000, 280, 1265, 345),
         'stars': [(1157, 96, 11), (1180, 129, 7)],
         'dots': [(1145, 76, 1.8), (1170, 112, 2), (1188, 104, 1.5), (1162, 140, 1.6)],
     },
     'cheer': {
         'box': (928, 505, 1436, 965),
+        'scarf': (1060, 740, 1345, 845),
         'stars': [(1214, 556, 12), (1221, 592, 8)],
         'dots': [(1206, 538, 1.6), (1232, 572, 2), (1201, 600, 2), (1234, 604, 1.5)],
     },
@@ -48,8 +54,30 @@ def star_points(cx, cy, r, inner=0.45):
     return pts
 
 
+def is_navy(p):
+    r, g, b = p
+    return r < 90 and g < 100 and b > 50 and b - r > 20
+
+
+def paint_scarf(src, box):
+    """box の中の太い紺の面(スカーフ)だけを黄色にする。細いふち線は紺のまま残す"""
+    x0, y0, x1, y1 = box
+    region = src.crop(box)
+    mask = Image.new('L', region.size, 0)
+    rp, mp = region.load(), mask.load()
+    for y in range(region.height):
+        for x in range(region.width):
+            if is_navy(rp[x, y]):
+                mp[x, y] = 255
+    # 線(太さ6px前後)を消して面だけ残し、ふち線の分を残して戻す
+    fill = mask.filter(ImageFilter.MinFilter(13)).filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(1.2))
+    yellow = Image.new('RGB', region.size, YELLOW)
+    src.paste(Image.composite(yellow, region, fill), (x0, y0))
+
+
 def build(name, spec):
     src = Image.open(SRC).convert('RGB')
+    paint_scarf(src, spec['scarf'])
     x0, y0, x1, y1 = spec['box']
     # 星は原画座標で描くので、先に原画全体へ重ねてから切り出す
     layer = Image.new('RGBA', (src.width * SS, src.height * SS), (0, 0, 0, 0))
