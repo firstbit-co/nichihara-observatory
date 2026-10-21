@@ -10,12 +10,32 @@
 
 ## 最新案:にちはらん
 
-ご提案いただいたデザイン(ドームの帽子・紺のケープ襟・胸の金の星・紺の足、キャッチコピー「いっしょに、宇宙をのぞこ!」)をもとに、「もっと可愛く」の方針でブラッシュアップしたもの。
+新田さん提供のキャラクター案(2026-10-21、`mascot/nichiharan/reference-v2.webp`)をもとに、サイト用のポーズを SVG で描き起こしたもの。
+
+- ドームの帽子:右寄りの紺のスリット、太いつば。**スリットの中にはいつも金の星と星粒を描く**
+- 顔:たて長の紺の目、横長のピーチ色のほっぺ、開いた口
+- 波形のふちの紺の襟と、左右にのびるマントの裾。胸に金の星、紺の足
+- キャッチコピー「いっしょに、宇宙をのぞこ!」、口ぐせ「今日は晴れるかなぁ」(新田さん指定)
 
 ![にちはらん キャラクターシート](mascot/nichiharan/sheet.png)
 
-| 変更点 | 元案 | ブラッシュアップ後 |
-| --- | --- | --- |
+| ファイル | 用途 |
+| --- | --- |
+| `mascot/nichiharan/wave.svg` | こんばんは!(基本) |
+| `mascot/nichiharan/telescope.svg` | 観望ガイド |
+| `mascot/nichiharan/cheer.svg` | 今夜は開催! |
+| `mascot/nichiharan/hareru.svg` | 口ぐせ「今日は晴れるかなぁ」 |
+| `mascot/nichiharan/sleep.svg` | 休館日・おやすみ |
+| `mascot/nichiharan/cancelled.svg` | くもりで中止… |
+| `mascot/nichiharan/wish.svg` | 願い星★宅配便 |
+| `mascot/nichiharan/reference-v2.webp` | 新田さん提供のキャラクター案(最新) |
+| `mascot/nichiharan/reference-original.webp` | 最初にご提案いただいた元画像 |
+
+SVG は `node docs/mascot/nichiharan.mjs` で作り直せる(色は `COLORS`、ポーズは `VARIANTS`)。作り直したら `public/images/nichiharan/` にコピーし、トップ・天文台についての `public/images/nichiharan-wave.jpg` `nichiharan-scope.jpg` も書き出し直す。
+プロフィールと一日の過ごし方は `src/pages/nichiharan.astro` にある。
+名前「にちはらん」は、2026-10 の検索で同名キャラクターは見つからなかった。商標(J-PlatPat)の確認は別途必要。
+
+--- | --- | --- |
 | 頭身 | 約2.5頭身 | **2頭身**。頭(ドーム)を大きく、体はちいさく |
 | 目 | 縦長の点目 | 顔の**低め**に大きく、**ハイライト2つ**でうるっと |
 | ほっぺ | 丸 | **横長**のやわらかいピーチ色 |

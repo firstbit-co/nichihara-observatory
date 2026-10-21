@@ -28,6 +28,7 @@ const poses = [
   { file: 'wave', label: 'ごあいさつ', alt: '手を振るにちはらん' },
   { file: 'telescope', label: '望遠鏡', alt: '望遠鏡をのぞくにちはらん' },
   { file: 'cheer', label: 'ばんざい', alt: '両手を上げるにちはらん' },
+  { file: 'hareru', label: 'くちぐせ', alt: '空を見上げて「今日は晴れるかなぁ」とつぶやくにちはらん' },
   { file: 'sleep', label: 'おひるね', alt: 'まくらを抱いて眠るにちはらん' },
   { file: 'cancelled', label: 'くもり', alt: '雨雲の下で困った顔のにちはらん' },
   { file: 'wish', label: 'おてがみ', alt: '手紙を持つにちはらん' },
@@ -47,7 +48,7 @@ const poses = [
       <img class="profile__img" src="/images/nichiharan/wave.svg" alt="手を振るにちはらん" width="300" height="320">
       <div class="prose">
         <h2>どんな子?</h2>
-        <p>ドームのぼうしをかぶった、天文台の子です。ぼうしのスリットが開くと、中から星がのぞきます。</p>
+        <p>ドームのぼうしをかぶった、天文台の子です。ぼうしのスリットの中には、いつも星が光っています。</p>
         <p>昼はおひるね。夜になると、望遠鏡のところでみんなを待っています。</p>
         <p class="catch">「いっしょに、宇宙をのぞこ!」</p>
       </div>
@@ -76,8 +77,8 @@ const poses = [
       <h2>かたちのひみつ</h2>
       <ul class="prose">
         <li>ドームのぼうし … 天文台のドームです。</li>
-        <li>スリットの星 … 夜に開くドームと、そこから見える星空です。</li>
-        <li>紺のケープ … 枕瀬山の夜空の色です。</li>
+        <li>スリットの星 … ドームのスリットから見える星空です。</li>
+        <li>紺の襟とマント … 枕瀬山の夜空の色です。</li>
         <li>胸の金の星 … みんなが見上げる星です。</li>
       </ul>
     </section>
@@ -110,7 +111,7 @@ const poses = [
   .poses img {
     width: 100%;
     height: auto;
-    background: #fffaf0;
+    background: #fdf8ec;
     border-radius: 24px;
   }
   .profile h2 {
