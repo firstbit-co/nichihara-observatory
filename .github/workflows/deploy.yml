@@ -1,7 +1,8 @@
 # 専用リポジトリに切り出した後に使う GitHub Pages への公開(firstbit-corporate 内では動かない)
 # 事前設定: Settings → Pages → Source を「GitHub Actions」に。
 #           Settings → Secrets and variables → Actions → Variables に
-#           SITE_URL(例 https://nichihara-obs.jp)と PUBLIC_ALLOW_INDEX(本公開で true、それまでは false)
+#           PUBLIC_ALLOW_INDEX(本公開で true、それまでは false)
+#           独自ドメインを設定するまでは https://<org>.github.io/<repo>/ で配信され、URL とサブパスは自動で決まる
 name: Deploy
 
 on:
@@ -25,18 +26,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: ${{ vars.SITE_URL }}
       PUBLIC_ALLOW_INDEX: ${{ vars.PUBLIC_ALLOW_INDEX || 'false' }}
     steps:
       - uses: actions/checkout@v4
+      - id: pages
+        uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm test
+      # 表記の検査は確定稿と同じ形(サブパスなし)のビルドで行い、そのあと公開用にビルドし直す
+      - run: npm run build && npm run check:copy
       - run: npm run build
-      - run: npm run check:copy
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+      - run: node scripts/apply-base.mjs
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

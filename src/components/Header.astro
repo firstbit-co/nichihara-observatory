@@ -1,7 +1,8 @@
 ---
 import { NAV, SITE } from '../data/facility';
 
-const current = Astro.url.pathname;
+// GitHub Pages のサブパス配信(BASE_PATH)でも同じ比較ができるよう base を外す
+const current = '/' + Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
 ---
 
 <header class="site-header">

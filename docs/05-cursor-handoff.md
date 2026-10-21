@@ -22,7 +22,7 @@ cp -r nichihara-observatory ~/work/ && cd ~/work/nichihara-observatory && git in
 切り出したリポジトリには `.github/workflows/deploy.yml` があり、main への push と毎朝 6:00 JST に GitHub Pages へ公開する。
 
 1. リポジトリの Settings → Pages → Source を「GitHub Actions」にする
-2. Settings → Secrets and variables → Actions → Variables に `SITE_URL` を登録(独自ドメインがまだなら `https://<org>.github.io/nichihara-observatory` ではなく、独自ドメイン取得後に公開するのを推奨。サブパス配信には `base` 設定が要る)
+2. Settings → Secrets and variables → Actions → Variables に `PUBLIC_ALLOW_INDEX` を登録。URL は自動で決まる(独自ドメインなしなら `https://firstbit-co.github.io/nichihara-observatory/`。サブパス用のリンク付け替えは `scripts/apply-base.mjs`)
 3. まずは `PUBLIC_ALLOW_INDEX=false` のまま公開して確認(検索に出ない状態)
 4. 確認がすんだら `PUBLIC_ALLOW_INDEX=true` にして Actions の「Deploy」を手動実行 → robots.txt が公開用になり noindex が外れる
 5. 独自ドメインは Settings → Pages → Custom domain で設定し、DNS に CNAME を追加
