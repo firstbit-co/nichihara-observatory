@@ -10,28 +10,25 @@
 
 ## 最新案:にちはらん
 
-新田さん提供のキャラクター案(2026-10-21、`mascot/nichiharan/reference-v2.webp`)をもとに、サイト用のポーズを SVG で描き起こしたもの。
+新田さん提供のキャラクター案(2026-10-21、`mascot/nichiharan/reference-v2.webp`)を、**絵の形を変えずに**サイトで使う。
+原画から3体を切り出し、**帽子のスリットの中に金の星と白い星粒を描き足す**だけにしている(描き直すと体型が変わってしまうため)。
 
-- ドームの帽子:右寄りの紺のスリット、太いつば。**スリットの中にはいつも金の星と星粒を描く**
-- 顔:たて長の紺の目、横長のピーチ色のほっぺ、開いた口
-- 波形のふちの紺の襟と、左右にのびるマントの裾。胸に金の星、紺の足
+- 作り直し:`python3 docs/mascot/nichiharan-from-reference.py public/images/nichiharan`(星の位置は同ファイルの `FIGURES`)
 - キャッチコピー「いっしょに、宇宙をのぞこ!」、口ぐせ「今日は晴れるかなぁ」(新田さん指定)
 
-![にちはらん キャラクターシート](mascot/nichiharan/sheet.png)
+![にちはらん](mascot/nichiharan/sheet.png)
 
-| ファイル | 用途 |
+| ファイル(public/images/nichiharan/) | 内容 |
 | --- | --- |
-| `mascot/nichiharan/wave.svg` | こんばんは!(基本) |
-| `mascot/nichiharan/telescope.svg` | 観望ガイド |
-| `mascot/nichiharan/cheer.svg` | 今夜は開催! |
-| `mascot/nichiharan/hareru.svg` | 口ぐせ「今日は晴れるかなぁ」 |
-| `mascot/nichiharan/sleep.svg` | 休館日・おやすみ |
-| `mascot/nichiharan/cancelled.svg` | くもりで中止… |
-| `mascot/nichiharan/wish.svg` | 願い星★宅配便 |
-| `mascot/nichiharan/reference-v2.webp` | 新田さん提供のキャラクター案(最新) |
-| `mascot/nichiharan/reference-original.webp` | 最初にご提案いただいた元画像 |
+| `wave.png` | 手を振る(基本) |
+| `telescope.png` | 望遠鏡をのぞく |
+| `cheer.png` | ばんざい |
+| `hareru.png` | 口ぐせ「今日は晴れるかなぁ」のふきだし付き(wave を縮めて添えたもの) |
 
-SVG は `node docs/mascot/nichiharan.mjs` で作り直せる(色は `COLORS`、ポーズは `VARIANTS`)。作り直したら `public/images/nichiharan/` にコピーし、トップ・天文台についての `public/images/nichiharan-wave.jpg` `nichiharan-scope.jpg` も書き出し直す。
+トップ・天文台についての `public/images/nichiharan-wave.jpg` `nichiharan-scope.jpg` も、この wave / telescope から作っている。
+おひるね・くもり・おてがみなど別のポーズが要るときは、原画と同じタッチで描いてもらう(イラストレーターに原画を渡す)。
+`docs/mascot/nichiharan.mjs` と同フォルダの SVG は、以前の描き起こし案(サイトでは使っていない)。
+
 プロフィールと一日の過ごし方は `src/pages/nichiharan.astro` にある。
 名前「にちはらん」は、2026-10 の検索で同名キャラクターは見つからなかった。商標(J-PlatPat)の確認は別途必要。
 

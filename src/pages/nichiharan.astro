@@ -1,7 +1,8 @@
 ---
 /**
  * マスコット「にちはらん」の説明ページ。トップでは小さく置くだけにして、説明はここにまとめる。
- * 画像の元データは docs/mascot/nichiharan.mjs(node で再生成 → public/images/nichiharan/ にコピー)。
+ * 画像は新田さん提供の原画(docs/mascot/nichiharan/reference-v2.webp)から切り出したもの。形は変えず、帽子のスリットに星だけ描き足す。
+ * 作り直し:python3 docs/mascot/nichiharan-from-reference.py public/images/nichiharan
  * TODO: 町の公式キャラクターとして制定される前に公開する場合は「キャラクター案」と表記する。
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -28,10 +29,7 @@ const poses = [
   { file: 'wave', label: 'ごあいさつ', alt: '手を振るにちはらん' },
   { file: 'telescope', label: '望遠鏡', alt: '望遠鏡をのぞくにちはらん' },
   { file: 'cheer', label: 'ばんざい', alt: '両手を上げるにちはらん' },
-  { file: 'hareru', label: 'くちぐせ', alt: '空を見上げて「今日は晴れるかなぁ」とつぶやくにちはらん' },
-  { file: 'sleep', label: 'おひるね', alt: 'まくらを抱いて眠るにちはらん' },
-  { file: 'cancelled', label: 'くもり', alt: '雨雲の下で困った顔のにちはらん' },
-  { file: 'wish', label: 'おてがみ', alt: '手紙を持つにちはらん' },
+  { file: 'hareru', label: 'くちぐせ', alt: '「今日は晴れるかなぁ」とつぶやくにちはらん' },
 ];
 ---
 
@@ -45,7 +43,7 @@ const poses = [
 
   <div class="container">
     <section class="profile">
-      <img class="profile__img" src="/images/nichiharan/wave.svg" alt="手を振るにちはらん" width="300" height="320">
+      <img class="profile__img" src="/images/nichiharan/wave.png" alt="手を振るにちはらん" width="600" height="640">
       <div class="prose">
         <h2>どんな子?</h2>
         <p>ドームのぼうしをかぶった、天文台の子です。ぼうしのスリットの中には、いつも星が光っています。</p>
@@ -89,7 +87,7 @@ const poses = [
         {
           poses.map((p) => (
             <li>
-              <img src={`/images/nichiharan/${p.file}.svg`} alt={p.alt} width="300" height="320" loading="lazy" />
+              <img src={`/images/nichiharan/${p.file}.png`} alt={p.alt} width="600" height="640" loading="lazy" />
               <span>{p.label}</span>
             </li>
           ))
@@ -111,7 +109,7 @@ const poses = [
   .poses img {
     width: 100%;
     height: auto;
-    background: #fdf8ec;
+    background: #fdfcf5;
     border-radius: 24px;
   }
   .profile h2 {
@@ -160,7 +158,7 @@ const poses = [
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
     gap: var(--space-4);
   }
   .poses li {
