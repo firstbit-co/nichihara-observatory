@@ -37,7 +37,9 @@
 
 | ファイル | 内容 | 状態 |
 | --- | --- | --- |
-| `public/images/dome-night.jpg` | 夜空の下でスリットを開けたドームの写真 | **仮画像(イラスト)**。写真が届いたら上書きする。元は `docs/images/dome-night-placeholder.mjs` |
+| `public/images/dome-night.jpg` | 夕暮れの空(月とほうき星)とドームの写真 | 写真(新田さん提供)。幅900px |
+| `public/images/dome-day.jpg` | 昼の天文台の写真(来館の流れ) | 写真(新田さん提供)。幅900px |
+| `public/images/archive-hall.jpg` | 天文資料館の展示室の写真(施設の案内) | 写真(新田さん提供)。幅900px |
 | `public/images/nichiharan-scope.jpg` | にちはらん(望遠鏡) | `docs/mascot/nichiharan/telescope.svg` から作成 |
 | `public/images/nichiharan-wave.jpg` | にちはらん(ごあいさつ) | `docs/mascot/nichiharan/wave.svg` から作成 |
 | `public/images/nichiharan/*.svg` | `/nichiharan/` のポーズ一覧 | `docs/mascot/nichiharan/` のコピー |

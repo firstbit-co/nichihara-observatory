@@ -2,7 +2,7 @@
 /**
  * 施設の案内。天文台の説明とあゆみは「天文台について」(/about/)にまとめたので、ここでは枕瀬山の施設を案内する。
  * 文章は新田さん作成の原稿(2026-10-21)。受付から順に回る流れに合わせ、ポランの広場 → 科学館の順に置く。
- * TODO(写真): 旧サイト(sun-net.jp)の写真は、この環境から取得できなかった。使ってよい写真を public/images/ に置いて追加する
+ * 写真は新田さん提供(2026-10-21)。星と森の科学館・25世紀の森・テニスコートの写真は未入手
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PARK_FACILITIES } from '../data/facility';
@@ -29,6 +29,10 @@ const { intro, closing, museum, archive, forest25, tennis } = PARK_FACILITIES;
       <p class="facility-since">{archive.opened}年〜</p>
       <h2>{archive.name}</h2>
       <p class="facility-tagline">{archive.tagline}</p>
+      <figure class="facility-photo">
+        <img src="/images/archive-hall.jpg" alt="天文資料館の展示室。すばる望遠鏡の解説パネルや、惑星を紹介する展示が並んでいる" width="900" height="600" loading="lazy">
+        <figcaption>天文資料館の展示室。</figcaption>
+      </figure>
       {archive.text.map((t) => <p>{t}</p>)}
       <dl class="facility-info">
         {archive.info.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
@@ -136,6 +140,20 @@ const { intro, closing, museum, archive, forest25, tennis } = PARK_FACILITIES;
     font-size: 1.25rem;
     color: var(--color-accent);
     margin: var(--space-2) 0 var(--space-6);
+  }
+  .facility-photo {
+    margin: 0 0 var(--space-6);
+  }
+  .facility-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+  .facility-photo figcaption {
+    margin-top: var(--space-2);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
   }
   .facility-info {
     margin: var(--space-6) 0 0;
