@@ -1,26 +1,51 @@
 ---
 /**
- * 施設の案内。天文台の説明とあゆみは「天文台について」(/about/)にまとめたので、ここでは敷地内の施設を案内する。
+ * 施設の案内。天文台の説明とあゆみは「天文台について」(/about/)にまとめたので、ここでは枕瀬山の施設を案内する。
+ * 文章は新田さん作成の原稿(2026-10-21)。受付から順に回る流れに合わせ、ポランの広場 → 科学館の順に置く。
  * TODO(写真): 旧サイト(sun-net.jp)の写真は、この環境から取得できなかった。使ってよい写真を public/images/ に置いて追加する
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PARK_FACILITIES } from '../data/facility';
 
-const { museum, archive, forest25, tennis } = PARK_FACILITIES;
+const { intro, closing, museum, archive, forest25, tennis } = PARK_FACILITIES;
 ---
 
-<BaseLayout title="施設の案内" description="星と森の科学館、天文資料館(ポランの広場)、25世紀の森、テニスコートの案内です。">
-  <header class="page-header">
-    <div class="container">
-      <h1>施設の案内</h1>
-      <p>天文台のある枕瀬山の敷地には、次の施設があります。</p>
+<BaseLayout title="施設の案内" description="枕瀬山の天文資料館(ポランの広場)、星と森の科学館、25世紀の森、テニスコートの案内です。">
+  <header class="page-header facilities-hero">
+    <div class="container prose">
+      <p class="eyebrow">施設の案内</p>
+      <h1>{intro.title}</h1>
+      {intro.text.map((t) => <p>{t}</p>)}
+      <nav class="facility-jump" aria-label="このページの施設">
+        <a href="#archive">ポランの広場</a>
+        <a href="#museum">星と森の科学館</a>
+        <a href="#others">そのほかの施設</a>
+      </nav>
     </div>
   </header>
 
-  <div class="container prose">
-    <section id="museum">
+  <div class="container">
+    <section class="facility prose" id="archive">
+      <p class="facility-since">{archive.opened}年〜</p>
+      <h2>{archive.name}</h2>
+      <p class="facility-tagline">{archive.tagline}</p>
+      {archive.text.map((t) => <p>{t}</p>)}
+      <dl class="facility-info">
+        {archive.info.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </section>
+
+    <section class="facility prose" id="museum">
+      <p class="facility-since">{museum.opened}年〜</p>
       <h2>{museum.name}</h2>
+      <p class="facility-tagline">{museum.tagline}</p>
       {museum.text.map((t) => <p>{t}</p>)}
+      <ul class="questions">
+        {museum.questions.map((q) => <li>{q}</li>)}
+      </ul>
+      {museum.exhibits.map((t) => <p>{t}</p>)}
+      <h3>{museum.earthTitle}</h3>
+      {museum.earth.map((t) => <p>{t}</p>)}
       <h3>利用料</h3>
       <table class="table">
         <tbody>{museum.fees.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody>
@@ -28,25 +53,155 @@ const { museum, archive, forest25, tennis } = PARK_FACILITIES;
       <p class="muted">{museum.feeNote}</p>
     </section>
 
-    <section id="archive">
-      <h2>{archive.name}</h2>
-      {archive.text.map((t) => <p>{t}</p>)}
-      <h3>利用料</h3>
-      <p>{archive.feeNote}</p>
+    <section class="facility prose" id="others">
+      <h2>そのほかの施設</h2>
+      <div class="others">
+        <div class="card" id="forest">
+          <h3>{forest25.name}</h3>
+          <p class="muted">くわしい案内は準備中です。</p>
+          <!-- TODO(取材): 25世紀の森の内容・利用方法・利用料。検索では情報が見つからなかった -->
+        </div>
+        <div class="card" id="tennis">
+          <h3>{tennis.name}</h3>
+          <p class="muted">くわしい案内は準備中です。</p>
+          <!-- TODO(取材): 面数・利用時間・利用料・申込先 -->
+        </div>
+      </div>
     </section>
 
-    <section id="forest">
-      <h2>{forest25.name}</h2>
-      <p class="muted">くわしい案内は準備中です。</p>
-      <!-- TODO(取材): 25世紀の森の内容・利用方法・利用料。検索では情報が見つからなかった -->
+    <section class="closing" id="closing">
+      <h2>{closing.title}</h2>
+      {closing.text.map((t) => <p>{t}</p>)}
+      <p class="closing-links">
+        <a class="button button-gold" href="/guide/">利用案内を見る</a>
+        <a class="button button-quiet" href="/about/">天文台について</a>
+      </p>
     </section>
-
-    <section id="tennis">
-      <h2>{tennis.name}</h2>
-      <p class="muted">くわしい案内は準備中です。</p>
-      <!-- TODO(取材): 面数・利用時間・利用料・申込先 -->
-    </section>
-
-    <p><a href="/about/">天文台について(歴史と75cm望遠鏡)</a></p>
   </div>
 </BaseLayout>
+
+<style>
+  .facilities-hero {
+    background: radial-gradient(ellipse at 80% 0%, #1f2b57 0%, var(--color-bg) 70%);
+  }
+  .facilities-hero h1 {
+    font-family: var(--font-serif);
+    line-height: 1.4;
+  }
+  .facilities-hero p + p {
+    margin-top: var(--space-3);
+  }
+  .eyebrow {
+    color: var(--color-accent) !important;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-2) !important;
+  }
+  .facility-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+  }
+  .facility-jump a {
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .facility {
+    margin-inline: auto;
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+  .facility:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .facility h2 {
+    margin: 0;
+  }
+  .facility-since {
+    margin: 0 0 var(--space-1);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+  .facility-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    margin: var(--space-2) 0 var(--space-6);
+  }
+  .facility-info {
+    margin: var(--space-6) 0 0;
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+  .facility-info div {
+    display: grid;
+    grid-template-columns: 5.5em 1fr;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+  }
+  .facility-info div + div {
+    border-top: 1px solid var(--color-border);
+  }
+  .facility-info dt {
+    font-weight: 700;
+  }
+  .facility-info dd {
+    margin: 0;
+  }
+  .questions {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .questions li {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-raised);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius);
+  }
+  .others {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    margin-top: var(--space-4);
+  }
+  .others h3 {
+    margin-top: 0;
+  }
+  .others p {
+    margin: 0;
+  }
+  .closing {
+    max-width: 44rem;
+    margin: var(--space-16) auto 0;
+    padding: var(--space-8);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .closing h2 {
+    margin-top: 0;
+    font-family: var(--font-serif);
+    line-height: 1.5;
+  }
+  .closing-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+</style>
