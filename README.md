@@ -82,7 +82,7 @@ npm run dev    # http://localhost:4321
 
 - [ ] `docs/04-content-inventory.md` の要確認項目がすべて確認済み(`npm run dev` で「要確認」バッジが0個)
 - [ ] 【サンプル】記事をすべて削除・差し替え
-- [x] トップの背景 `public/images/dome-night.jpg` を本物の写真に差し替え(2026-10-21。元画像は幅900pxなので、大きい原寸があれば差し替えると大画面でもくっきりする)
+- [x] トップの背景 `public/images/dome-night.jpg` を本物の写真に差し替え(2026-10-21、1536×1024)
 - [ ] 写真・学習資料・友の会のページ(今は「準備中」)の中身
 - [ ] `npm run check:copy` が通る
 - [ ] 写真・OGP 画像(`public/og.png`)・ロゴ
