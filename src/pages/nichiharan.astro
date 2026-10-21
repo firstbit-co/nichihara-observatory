@@ -6,6 +6,24 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+// プロフィール(口ぐせは新田さんの指定。ほかは docs/06-mascot.md の設定をもとにした案)
+const profile = [
+  ['なまえ', 'にちはらん'],
+  ['すんでいるところ', '枕瀬山のてっぺん、日原天文台'],
+  ['たんじょうび', '1985年8月(日原天文台が開いた月)'],
+  ['とくいなこと', '夜空で星を見つけること。雲のすきまの星も見のがしません'],
+  ['すきなもの', '晴れた夜、ほうき星、ふかふかのまくら'],
+  ['にがてなもの', 'くもり空、まぶしいライト'],
+  ['ゆめ', '2061年に、もう一度ハレー彗星を見ること'],
+];
+
+const day = [
+  { time: 'あさ', text: '空を見上げて、最初のひとこと。「今日は晴れるかなぁ」' },
+  { time: 'ひる', text: '枕瀬山の「まくら」で、ちょっとおひるね。晴れていれば、太陽のようすも気になります。' },
+  { time: 'ゆうがた', text: 'ドームのぼうしのスリットを、そーっと開けて準備。一番星をさがします。' },
+  { time: 'よる', text: '望遠鏡のそばで、みんなを待っています。くもりの日は、ちょっとしょんぼり。' },
+];
+
 const poses = [
   { file: 'wave', label: 'ごあいさつ', alt: '手を振るにちはらん' },
   { file: 'telescope', label: '望遠鏡', alt: '望遠鏡をのぞくにちはらん' },
@@ -33,6 +51,25 @@ const poses = [
         <p>昼はおひるね。夜になると、望遠鏡のところでみんなを待っています。</p>
         <p class="catch">「いっしょに、宇宙をのぞこ!」</p>
       </div>
+    </section>
+
+    <section class="prose">
+      <h2>プロフィール</h2>
+      <table class="table profile-table">
+        <tbody>
+          {profile.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
+          <tr><th scope="row">くちぐせ</th><td class="kuchiguse">「今日は晴れるかなぁ」</td></tr>
+        </tbody>
+      </table>
+      <p>天文台で星が見られるかどうかは、その日の空しだい。だから、にちはらんは毎日空を見上げて、つい「今日は晴れるかなぁ」とつぶやいてしまいます。</p>
+      <p>生まれた1985年は、ハレー彗星が地球に近づき、日本じゅうで星空への関心が高まった年。にちはらんは、その次にハレー彗星がやってくる2061年を、いまから楽しみにしています。</p>
+    </section>
+
+    <section class="prose">
+      <h2>にちはらんの一日</h2>
+      <ol class="day">
+        {day.map((d) => <li><span class="day__time">{d.time}</span><p>{d.text}</p></li>)}
+      </ol>
     </section>
 
     <section>
@@ -83,6 +120,39 @@ const poses = [
     font-family: var(--font-serif);
     font-size: 1.35rem;
     color: var(--color-accent);
+  }
+  .profile-table th {
+    width: 9em;
+    white-space: nowrap;
+  }
+  .kuchiguse {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-accent);
+  }
+  .day {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .day li {
+    display: grid;
+    grid-template-columns: 5.5em 1fr;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding: var(--space-4);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+  .day__time {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  .day p {
+    margin: 0;
   }
   .poses {
     list-style: none;

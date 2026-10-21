@@ -33,6 +33,8 @@
 | `mascot/nichiharan/wish.svg` | 願い星★宅配便 |
 | `mascot/nichiharan/reference-original.webp` | ご提案いただいた元画像 |
 
+口ぐせは「今日は晴れるかなぁ」(新田さん指定、2026-10-21)。プロフィールと一日の過ごし方は `src/pages/nichiharan.astro` にある。
+
 SVG は `node docs/mascot/nichiharan.mjs` で作り直せる(色は `COLORS`、ポーズは `VARIANTS`)。
 名前「にちはらん」は、2026-10 の検索で同名キャラクターは見つからなかった。商標(J-PlatPat)の確認は別途必要。
 
