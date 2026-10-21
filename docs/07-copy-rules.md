@@ -40,6 +40,7 @@
 | `public/images/dome-night.jpg` | 夕暮れの空(月とほうき星)とドームの写真 | 写真(新田さん提供)。幅900px |
 | `public/images/dome-day.jpg` | 昼の天文台の写真(来館の流れ) | 写真(新田さん提供)。幅900px |
 | `public/images/archive-hall.jpg` | 天文資料館の展示室の写真(施設の案内) | 写真(新田さん提供)。幅900px |
+| `public/images/dome-exterior.jpg` `telescope-75cm.jpg` `dome-star-trails.jpg` | 天文台の外観・75cm望遠鏡・星の軌跡(天文台について) | 写真(新田さん提供)。星の軌跡は幅600px |
 | `public/images/nichiharan-scope.jpg` | にちはらん(望遠鏡) | `docs/mascot/nichiharan/telescope.svg` から作成 |
 | `public/images/nichiharan-wave.jpg` | にちはらん(ごあいさつ) | `docs/mascot/nichiharan/wave.svg` から作成 |
 | `public/images/nichiharan/*.svg` | `/nichiharan/` のポーズ一覧 | `docs/mascot/nichiharan/` のコピー |
