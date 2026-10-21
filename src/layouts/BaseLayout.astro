@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/site.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import NoticeBar from '../components/NoticeBar.astro';
 import { CONTACT, SITE } from '../data/facility';
 
 interface Props {
@@ -77,6 +78,7 @@ const siteJsonLd = {
   <body>
     <a class="skip-link" href="#main">本文へスキップ</a>
     <Header />
+    <NoticeBar />
     <main id="main">
       <slot />
     </main>

@@ -78,6 +78,10 @@ npm run dev    # http://localhost:4321
 
 ※Phase 2 で CMS(管理画面)を入れ、ファイルを直接触らなくてよくする予定(`docs/03-roadmap.md`)。
 
+## 更新画面(CMS)
+
+お知らせ・イベントはブラウザの更新画面 `/admin/` から更新できる(Sveltia CMS)。使い方は [`docs/08-cms.md`](docs/08-cms.md)。
+
 ## 公開前チェックリスト
 
 - [ ] `docs/04-content-inventory.md` の要確認項目がすべて確認済み(`npm run dev` で「要確認」バッジが0個)

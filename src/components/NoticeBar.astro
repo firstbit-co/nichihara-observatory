@@ -1,0 +1,48 @@
+---
+/**
+ * 重要なお知らせの帯。お知らせ(src/content/news)で「重要なお知らせ」(important: true)にした最新の1件を、
+ * 全ページのヘッダーの下に出す。臨時休館など急ぎのときに更新画面(/admin/)からオンにする。
+ */
+import { getNews } from '../lib/content';
+
+const notice = (await getNews()).find((n) => n.data.important);
+---
+
+{
+  notice && (
+    <div class="notice-bar" role="region" aria-label="重要なお知らせ">
+      <div class="notice-bar__inner">
+        <span class="notice-bar__label">重要</span>
+        <a href={`/news/${notice.id}/`}>{notice.data.title}</a>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .notice-bar {
+    background: var(--color-accent);
+    color: #1a1200;
+  }
+  .notice-bar__inner {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding: var(--space-2) var(--gutter);
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    min-height: 44px;
+  }
+  .notice-bar__label {
+    flex: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0 var(--space-2);
+    border: 1px solid currentColor;
+    border-radius: 999px;
+  }
+  .notice-bar a {
+    color: inherit;
+    font-weight: 700;
+  }
+</style>

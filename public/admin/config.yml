@@ -1,0 +1,117 @@
+# 更新画面(Sveltia CMS)の設定。使い方は docs/08-cms.md
+# 保存すると GitHub の main に記事が入り、自動で公開し直される(1〜2分)。
+# 項目は src/content.config.ts のスキーマと合わせること。
+
+backend:
+  name: github
+  repo: firstbit-co/nichihara-observatory
+  branch: main
+  commit_messages:
+    create: '{{collection}}「{{slug}}」を追加'
+    update: '{{collection}}「{{slug}}」を更新'
+    delete: '{{collection}}「{{slug}}」を削除'
+    uploadMedia: '画像「{{path}}」を追加'
+    deleteMedia: '画像「{{path}}」を削除'
+
+site_url: https://firstbit-co.github.io/nichihara-observatory/
+
+# 記事に入れる画像の置き場所
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+output:
+  # 空の項目はファイルに書かない(料金や時刻を空にしたときに「料金:」だけ出ないように)
+  omit_empty_optional_fields: true
+
+collections:
+  - name: news
+    label: お知らせ
+    label_singular: お知らせ
+    description: >-
+      休館・営業の変更、天文現象の案内、メディア掲載など。
+      書き方のきまり:予約の受付を書かない/電話での確認をすすめない/料金が変わるとは書かない/「隣の」「日本初」は使わない。
+    folder: src/content/news
+    create: true
+    extension: md
+    format: frontmatter
+    # 日本語のタイトルは URL にできないので、日付と時刻でファイル名を作る
+    slug: '{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}'
+    summary: '{{date}} {{title}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: タイトル, widget: string }
+      - name: date
+        label: 日付
+        widget: datetime
+        format: YYYY-MM-DD
+        time_format: false
+        hint: お知らせの日付です。新しい順に並びます。
+      - name: category
+        label: 種類
+        widget: select
+        options: [お知らせ, 休館・営業, 道路・アクセス, メディア]
+        default: お知らせ
+      - name: important
+        label: 重要なお知らせ
+        widget: boolean
+        default: false
+        hint: オンにすると、トップページの上の帯に出ます。臨時休館など、急ぎのときだけ使います。
+      - name: draft
+        label: 下書き
+        widget: boolean
+        default: false
+        hint: オンの間はサイトに出ません。
+      - { name: body, label: 本文, widget: markdown }
+
+  - name: events
+    label: イベント
+    label_singular: イベント
+    description: >-
+      観望会・天文現象・季節のイベント。開催日が過ぎると「これからのイベント」から自動で外れます。
+      予約は受け付けていないので、予約や定員は書きません。
+    folder: src/content/events
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{fields.date}}-{{hour}}{{minute}}'
+    summary: '{{date}} {{title}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: イベント名, widget: string }
+      - name: date
+        label: 開催日
+        widget: datetime
+        format: YYYY-MM-DD
+        time_format: false
+      - name: startTime
+        label: 開始時刻
+        widget: string
+        required: false
+        pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', '「19:00」のように半角で入れてください']
+        hint: 例 19:00(なければ空のまま)
+      - name: endTime
+        label: 終了時刻
+        widget: string
+        required: false
+        pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', '「22:00」のように半角で入れてください']
+        hint: 例 22:00(なければ空のまま)
+      - name: category
+        label: 種類
+        widget: select
+        options: [観望会, 天文現象, ワークショップ, 季節イベント, その他]
+        default: 観望会
+      - name: summary
+        label: ひとことで
+        widget: text
+        hint: 一覧に出る短い説明です(1〜2文)。
+      - name: fee
+        label: 料金
+        widget: string
+        required: false
+        hint: 例「通常の観望料金」「無料」(なければ空のまま)
+      - name: draft
+        label: 下書き
+        widget: boolean
+        default: false
+        hint: オンの間はサイトに出ません。
+      - { name: body, label: 本文, widget: markdown }

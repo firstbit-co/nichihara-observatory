@@ -39,6 +39,7 @@ Astro 7 の静的サイト。背景と方針は `docs/` を参照(まず `docs/0
 ## コンテンツの追加
 
 - イベント: `src/content/events/YYYY-MM-slug.md`(スキーマは `src/content.config.ts`)
-- お知らせ: `src/content/news/YYYY-MM-slug.md`(トップには出ない。`/news/` に並ぶ)
+- お知らせ: `src/content/news/YYYY-MM-slug.md`(`/news/` に並ぶ。`important: true` の最新1件は全ページの上に帯で出る)
+- スタッフはブラウザの更新画面 `/admin/`(Sveltia CMS、設定 `public/admin/config.yml`)からお知らせ・イベントを更新する。スキーマを変えたら config.yml も合わせる(`docs/08-cms.md`)
 - 予定: 施設の Google カレンダー(トップに埋め込み。URL は `facility.ts` の `CALENDAR_URL`)
 - 臨時の休館・開館: `src/data/calendar-overrides.json`(`TonightPanel` を使うときだけ)
