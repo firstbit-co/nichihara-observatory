@@ -5,3 +5,7 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+# スプレッドシートから取り込んだ記事と取り込み結果(scripts/fetch-sheet.mjs が毎回作り直す)
+src/content/news/sheet-*.md
+src/content/events/sheet-*.md
+public/admin/status.html

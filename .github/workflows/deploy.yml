@@ -2,15 +2,16 @@
 # 事前設定: Settings → Pages → Source を「GitHub Actions」に。
 #           Settings → Secrets and variables → Actions → Variables に
 #           PUBLIC_ALLOW_INDEX(本公開で true、それまでは false)
+#           SHEET_ID(担当者が書く Google スプレッドシートの ID。docs/09-sheet.md)
 #           独自ドメインを設定するまでは https://<org>.github.io/<repo>/ で配信され、URL とサブパスは自動で決まる
 name: Deploy
 
 on:
   push:
     branches: [main]
-  # 「これからのイベント」の鮮度を保つため毎朝 6:00 JST に再公開
+  # 30分ごとにスプレッドシートを読み直して公開し直す(「これからのイベント」の入れ替えもこれで行う)
   schedule:
-    - cron: '0 21 * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -37,6 +38,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      # 担当者のスプレッドシートからお知らせ・イベントを取り込む。読めなければここで止まり、今の公開サイトが残る
+      - run: node scripts/fetch-sheet.mjs
+        env:
+          SHEET_ID: ${{ vars.SHEET_ID }}
       # 表記の検査は確定稿と同じ形(サブパスなし)のビルドで行い、そのあと公開用にビルドし直す
       - run: npm run build && npm run check:copy
       - run: npm run build
