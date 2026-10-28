@@ -33,5 +33,6 @@
 - `.github/workflows/deploy.yml` が30分ごとに `scripts/fetch-sheet.mjs` を動かし、シートの行を `src/content/{news,events}/sheet-*.md` に書き出してから公開する(書き出したファイルは git に入れない)
 - シートの ID はリポジトリの Variables `SHEET_ID`(なければ deploy.yml の既定値)
 - シートが読めないときは公開を止め、今のサイトを残す。GitHub の Actions に赤い×が付くので、共有設定とシート名・見出しを確認する
+- 担当者向けの1枚マニュアル:`docs/manual/staff-manual.pdf`(元は同じフォルダの HTML。Chrome で開いて PDF に印刷すれば作り直せる)
 - ひな形は `docs/sheet/nichihara-update.xlsx`(作り直しは `python3 docs/sheet/make-template.py`)
 - 写真付きの記事や、手で書いた記事(`src/content/` の `sheet-` で始まらないファイル)は、これまでどおり更新画面 `/admin/` で編集する
