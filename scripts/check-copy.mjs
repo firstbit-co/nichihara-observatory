@@ -30,9 +30,11 @@ const visibleText = (html) =>
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ');
 
-/** 比較用に、タグ間の空白・連続空白・属性の並び以外の差を見えるようにそろえる */
+/** 比較用に、タグ間の空白・連続空白・属性の並び以外の差を見えるようにそろえる。
+ * 「今日の空」(#today-sky)は天気などで毎回変わるので、中身を除いて比べる */
 const normalize = (html) =>
   html
+    .replace(/(<section[^>]*id="today-sky"[^>]*>)[\s\S]*?<\/section>/, '$1</section>')
     .replace(/\s+/g, ' ')
     .replace(/>\s+</g, '><')
     .replace(/\s+>/g, '>')

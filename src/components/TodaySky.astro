@@ -1,0 +1,70 @@
+---
+/**
+ * トップの「今日の空」。天気(Open-Meteo)と月の出・月の入り(計算)を、サイトを作るたび(30分ごと)に入れる。
+ * 中身は日によって変わるので、表記の検査(check-copy)の確定稿との比較からは外している。
+ */
+import { moonPhase } from '../lib/moon';
+import { jstTime, moonTimes } from '../lib/sky';
+import { cloudText, getTodayWeather } from '../lib/weather';
+import { toJstDateString } from '../lib/calendar';
+
+const now = new Date();
+const today = toJstDateString(now);
+const weather = await getTodayWeather(today);
+const moon = moonTimes(today);
+const phase = moonPhase(now);
+const label = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
+const updated = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', hour: 'numeric', minute: '2-digit' }).format(now);
+// 月の出・入りは時刻の早い順に並べる
+const moonEvents = [
+  moon.rise && { name: '月の出', at: moon.rise },
+  moon.set && { name: '月の入り', at: moon.set },
+]
+  .filter((e): e is { name: string; at: Date } => Boolean(e))
+  .sort((a, b) => a.at.getTime() - b.at.getTime());
+---
+
+<section class="section" id="today-sky">
+  <div class="wrap">
+    <h2>今日の空</h2>
+    <p class="section-intro">{label}・津和野町(日原天文台)</p>
+    <ul class="sky-cards">
+      <li>
+        <p class="sky-label">天気</p>
+        {
+          weather ? (
+            <>
+              <p class="sky-value">{weather.summary}</p>
+              <p class="sky-note">最高 {weather.tempMax}℃/最低 {weather.tempMin}℃<br />降水確率 {weather.precipitation}%</p>
+            </>
+          ) : (
+            <p class="sky-note">天気予報を取得できませんでした。</p>
+          )
+        }
+      </li>
+      <li>
+        <p class="sky-label">今夜の雲(19〜22時)</p>
+        {
+          weather?.nightCloud != null ? (
+            <>
+              <p class="sky-value">{cloudText(weather.nightCloud)}</p>
+              <p class="sky-note">雲量 {weather.nightCloud}%</p>
+            </>
+          ) : (
+            <p class="sky-note">—</p>
+          )
+        }
+      </li>
+      <li>
+        <p class="sky-label">月の出・月の入り</p>
+        <p class="sky-value">
+          {moonEvents.length ? moonEvents.map((e, i) => <>{i > 0 && <br />}{e.name} {jstTime(e.at)}</>) : '月の出・入りなし'}
+        </p>
+        <p class="sky-note">月齢 {Math.round(phase.age)}({phase.name})</p>
+      </li>
+    </ul>
+    <p class="sky-source">
+      {updated}時点の予報(30分ごとに更新)。天気:<a href="https://open-meteo.com/">Open-Meteo.com</a>。月の出・月の入りは計算による目安です。
+    </p>
+  </div>
+</section>

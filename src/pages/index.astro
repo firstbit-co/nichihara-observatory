@@ -6,6 +6,7 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CALENDAR_URL, CLOSED, FEES, HOURS, MAP_EMBED_URL, MAP_LINK_URL, RECEPTION, SORABE_URL, range, yen } from '../data/facility';
+import TodaySky from '../components/TodaySky.astro';
 ---
 
 <BaseLayout>
@@ -44,6 +45,8 @@ import { CALENDAR_URL, CLOSED, FEES, HOURS, MAP_EMBED_URL, MAP_LINK_URL, RECEPTI
     <p class="facts-source">開館時間は変わることがあります。料金は変わりません。</p>
   </section>
 
+
+  <TodaySky />
 
   <section class="section" id="flow">
     <div class="wrap">
