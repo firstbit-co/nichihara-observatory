@@ -13,6 +13,7 @@ const news = await getNews();
   </header>
 
   <div class="container">
+    {news.length === 0 && <p class="muted">現在お知らせはありません。</p>}
     <ul class="list">
       {
         news.map((n) => (

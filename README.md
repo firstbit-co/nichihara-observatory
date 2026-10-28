@@ -78,10 +78,9 @@ npm run dev    # http://localhost:4321
 
 ※Phase 2 で CMS(管理画面)を入れ、ファイルを直接触らなくてよくする予定(`docs/03-roadmap.md`)。
 
-## 更新画面(CMS)
+## お知らせ・イベントの更新
 
 担当者は **Google スプレッドシート** にお知らせ・イベントを書くだけで更新できる(30分ごとに反映)。使い方は [`docs/09-sheet.md`](docs/09-sheet.md)。
-写真付きの記事などは、ブラウザの更新画面 `/admin/`(Sveltia CMS)からも更新できる。使い方は [`docs/08-cms.md`](docs/08-cms.md)。
 
 ## 公開前チェックリスト
 

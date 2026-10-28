@@ -45,6 +45,6 @@ test('予約の言葉はイベントでも止める', () => {
 test('重要・タイトルの記号を正しく書き出す', () => {
   const r = newsFromRecord(news({ タイトル: '「臨時」: 休館', 重要: '○' }));
   assert.ok(r.ok);
-  assert.match(r.markdown, /title: "「臨時」: 休館"/);
-  assert.match(r.markdown, /important: true/);
+  assert.match(r.markdown ?? "", /title: "「臨時」: 休館"/);
+  assert.match(r.markdown ?? "", /important: true/);
 });
