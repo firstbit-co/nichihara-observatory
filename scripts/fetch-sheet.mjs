@@ -18,8 +18,6 @@ import { findRuleViolations } from './copy-rules.mjs';
 
 export const NEWS_SHEET = 'お知らせ';
 export const EVENTS_SHEET = 'イベント';
-// src/content.config.ts の news の category と同じにする
-const NEWS_CATEGORIES = ['お知らせ', 'イベント', '天文情報', '活動報告', '休館・営業', '道路・アクセス', 'メディア'];
 const EVENT_CATEGORIES = ['観望会', '天文現象', 'ワークショップ', '季節イベント', 'その他'];
 const PUBLISH = '公開する';
 
@@ -106,7 +104,8 @@ export function newsFromRecord(r) {
   if (!title) return { ok: false, title, reason: 'タイトルが空です' };
   const date = normalizeDate(r['日付'] ?? '');
   if (!date) return { ok: false, title, reason: '日付が読めません(例:2026/10/28)' };
-  const category = NEWS_CATEGORIES.includes(r['種類']) ? r['種類'] : 'お知らせ';
+  // 種類はシートに書いたものをそのまま使う(空なら「お知らせ」)
+  const category = r['種類'] || 'お知らせ';
   const body = r['本文'] ?? '';
   const violations = findRuleViolations(`${title}\n${body}`, { closureNews: category === '休館・営業' });
   if (violations.length) return { ok: false, title, reason: violations.map((v) => `${v.why}(「${v.excerpt}」)`).join(' / ') };
