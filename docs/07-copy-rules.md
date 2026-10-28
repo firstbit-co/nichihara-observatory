@@ -44,3 +44,7 @@
 | `public/images/nichiharan-scope.jpg` | にちはらん(望遠鏡) | `docs/mascot/nichiharan/telescope.svg` から作成 |
 | `public/images/nichiharan-wave.jpg` | にちはらん(ごあいさつ) | `docs/mascot/nichiharan/wave.svg` から作成 |
 | `public/images/nichiharan/*.svg` | `/nichiharan/` のポーズ一覧 | `docs/mascot/nichiharan/` のコピー |
+
+## 例外:臨時休館のお知らせ
+
+お知らせの種類が「休館・営業」のページだけは、金曜の休館など、ふだんと違う休館日を書いてよい(臨時休館の案内のため)。営業日・休館日の表示(トップ・利用案内)は変えない。検査は `scripts/check-copy.mjs` の `allowInClosureNews`。

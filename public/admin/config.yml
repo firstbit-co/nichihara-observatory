@@ -30,6 +30,7 @@ collections:
     description: >-
       休館・営業の変更、天文現象の案内、メディア掲載など。
       書き方のきまり:予約の受付を書かない/電話での確認をすすめない/料金が変わるとは書かない/「隣の」「日本初」は使わない。
+      臨時休館(金曜休館など)は、種類を「休館・営業」にして書く。
     folder: src/content/news
     create: true
     extension: md
@@ -51,6 +52,7 @@ collections:
         widget: select
         options: [お知らせ, 休館・営業, 道路・アクセス, メディア]
         default: お知らせ
+        hint: 臨時休館・臨時開館は「休館・営業」にします(金曜の休館など、ふだんと違う休館日を書けるのはこの種類だけです)。
       - name: important
         label: 重要なお知らせ
         widget: boolean
