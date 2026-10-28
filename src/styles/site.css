@@ -1,5 +1,5 @@
 /*
- * ページ部品のスタイル(トップの .stage / .facts / .story-copy / .mascot-spot / .visit-steps など)。
+ * ページ部品のスタイル(トップの .stage / .facts / .story-copy / .mascot-spot など)。
  * 色・余白は global.css のトークンを使う。
  */
 
@@ -72,7 +72,7 @@
   margin-inline: auto;
   padding: var(--space-16) var(--gutter) var(--space-16);
 }
-.stage-copy > p:not(.stage-lead):not(.stage-caption) {
+.stage-copy > p:not(.stage-lead) {
   max-width: 30rem;
 }
 .stage h1 {
@@ -92,11 +92,6 @@
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-6);
-}
-.stage-caption {
-  margin: var(--space-8) 0 0;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
 }
 
 /* 来館の要点(4項目) */
@@ -179,60 +174,6 @@
   margin: 0;
 }
 
-/* 来館の流れの写真(昼の天文台) */
-.flow-photo {
-  margin: var(--space-6) 0 0;
-}
-.flow-photo img {
-  display: block;
-  width: 100%;
-  max-height: 320px;
-  object-fit: cover;
-  object-position: center 60%;
-  border-radius: var(--radius);
-}
-.flow-photo figcaption {
-  margin-top: var(--space-2);
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-/* 来館の流れ(3ステップ) */
-.visit-steps {
-  list-style: none;
-  counter-reset: step;
-  margin: var(--space-6) 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
-}
-.visit-steps li {
-  counter-increment: step;
-  background: var(--color-bg-raised);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--space-6);
-}
-.visit-steps li::before {
-  content: counter(step);
-  display: inline-grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: #1a1200;
-  font-weight: 700;
-}
-.visit-steps h3 {
-  margin: var(--space-3) 0 var(--space-2);
-}
-.visit-steps p {
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
 /* 予定(Google カレンダーの埋め込み) */
 .calendar-frame {
   border: 1px solid var(--color-border);
@@ -290,9 +231,6 @@
     grid-row: auto;
     justify-self: end;
     margin-top: var(--space-4);
-  }
-  .visit-steps {
-    grid-template-columns: 1fr;
   }
   .calendar-frame iframe {
     height: 480px;
@@ -401,11 +339,6 @@
   width: 100%;
   height: auto;
   border-radius: var(--radius);
-}
-.intro-photo figcaption {
-  margin-top: var(--space-2);
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
 }
 @media (min-width: 768px) {
   .intro-body {

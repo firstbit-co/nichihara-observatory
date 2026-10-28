@@ -38,7 +38,6 @@
 | ファイル | 内容 | 状態 |
 | --- | --- | --- |
 | `public/images/dome-night.jpg` | 夕暮れの空(月とほうき星)とドームの写真 | 写真(新田さん提供、2026-10-21差し替え)。1536×1024 |
-| `public/images/dome-day.jpg` | 昼の天文台の写真(来館の流れ) | 写真(新田さん提供、2026-10-21差し替え)。1536×1024 |
 | `public/images/archive-hall.jpg` | 天文資料館の展示室の写真(施設の案内) | 写真(新田さん提供、2026-10-21差し替え)。1536×1024 |
 | `public/images/dome-exterior.jpg` `telescope-75cm.jpg` `dome-star-trails.jpg` | 天文台の外観・75cm望遠鏡・星の軌跡(天文台について) | 写真(新田さん提供)。外観・望遠鏡は1536×1024 |
 | `public/images/nichiharan-scope.jpg` | にちはらん(望遠鏡) | `docs/mascot/nichiharan/telescope.svg` から作成 |
