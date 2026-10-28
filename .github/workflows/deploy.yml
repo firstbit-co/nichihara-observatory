@@ -41,7 +41,8 @@ jobs:
       # 担当者のスプレッドシートからお知らせ・イベントを取り込む。読めなければここで止まり、今の公開サイトが残る
       - run: node scripts/fetch-sheet.mjs
         env:
-          SHEET_ID: ${{ vars.SHEET_ID }}
+          # 担当者の更新シート(https://docs.google.com/spreadsheets/d/<ID>/)。Variables の SHEET_ID があればそちらを使う
+          SHEET_ID: ${{ vars.SHEET_ID || '1nUv0VPi4TfoIRrEscgyrEps8zKh50eY8QfI4-gNICyc' }}
       # 表記の検査は確定稿と同じ形(サブパスなし)のビルドで行い、そのあと公開用にビルドし直す
       - run: npm run build && npm run check:copy
       - run: npm run build
