@@ -18,7 +18,8 @@ import { findRuleViolations } from './copy-rules.mjs';
 
 export const NEWS_SHEET = 'お知らせ';
 export const EVENTS_SHEET = 'イベント';
-const NEWS_CATEGORIES = ['お知らせ', '休館・営業', '道路・アクセス', 'メディア'];
+// src/content.config.ts の news の category と同じにする
+const NEWS_CATEGORIES = ['お知らせ', 'イベント', '天文情報', '活動報告', '休館・営業', '道路・アクセス', 'メディア'];
 const EVENT_CATEGORIES = ['観望会', '天文現象', 'ワークショップ', '季節イベント', 'その他'];
 const PUBLISH = '公開する';
 

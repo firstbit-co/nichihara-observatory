@@ -20,13 +20,13 @@ const events = defineCollection({
   }),
 });
 
-/** お知らせ(休館・道路情報・メディア掲載など) */
+/** お知らせ。種類ごとの一覧(タブ)は src/lib/content.ts の NEWS_TABS */
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    category: z.enum(['お知らせ', '休館・営業', '道路・アクセス', 'メディア']),
+    category: z.enum(['お知らせ', 'イベント', '天文情報', '活動報告', '休館・営業', '道路・アクセス', 'メディア']),
     /** トップページ上部の帯に出す重要なお知らせ */
     important: z.boolean().default(false),
     draft: z.boolean().default(false),

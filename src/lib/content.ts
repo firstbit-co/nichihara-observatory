@@ -31,6 +31,14 @@ export async function getNews(limit?: number): Promise<CollectionEntry<'news'>[]
   return limit ? news.slice(0, limit) : news;
 }
 
+/** お知らせ一覧のタブ。「お知らせ」タブには休館・営業などの種類もまとめる */
+export const NEWS_TABS = [
+  { slug: 'notice', label: 'お知らせ', categories: ['お知らせ', '休館・営業', '道路・アクセス', 'メディア'] },
+  { slug: 'event', label: 'イベント', categories: ['イベント'] },
+  { slug: 'astronomy', label: '天文情報', categories: ['天文情報'] },
+  { slug: 'report', label: '活動報告', categories: ['活動報告'] },
+] as const;
+
 export function formatDate(date: Date): string {
   return date.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
 }
