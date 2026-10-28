@@ -25,7 +25,7 @@
 | `cheer.png` | ばんざい |
 | `hareru.png` | 口ぐせ「今日は晴れるかなぁ」のふきだし付き(wave を縮めて添えたもの) |
 
-トップ・天文台についての `public/images/nichiharan-wave.jpg` `nichiharan-scope.jpg` も、この wave / telescope から作っている。
+にちはらんは「天文台について」(/about/)の中だけに載せる(`src/components/NichiharanSection.astro`)。トップなどほかのページには置かない。
 おひるね・くもり・おてがみなど別のポーズが要るときは、原画と同じタッチで描いてもらう(イラストレーターに原画を渡す)。
 `docs/mascot/nichiharan.mjs` と同フォルダの SVG は、以前の描き起こし案(サイトでは使っていない)。
 

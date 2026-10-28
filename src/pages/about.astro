@@ -7,6 +7,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Verify from '../components/Verify.astro';
 import { HISTORY, TELESCOPE } from '../data/facility';
+import NichiharanSection from '../components/NichiharanSection.astro';
 
 // 原稿で「要確認」の項目は、本番ビルドでは出さない(開発サーバーでは「要確認」付きで見える)
 const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
@@ -24,7 +25,6 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
       <div class="prose">
         <p class="lead">日原(にちはら)天文台は、島根県津和野町の枕瀬山(まくらせやま)山頂、標高255mにある公開天文台です。1985年の開台以来、口径75cmの反射望遠鏡で、どなたでも星をのぞくことができます。この望遠鏡には、のちの「すばる望遠鏡」へ続く、日本の大型望遠鏡開発の歴史が刻まれています。</p>
       </div>
-      <img class="mascot-spot" src="/images/nichiharan-scope.jpg" alt="にちはらん" width="338" height="314">
     </section>
 
     <div class="prose">
@@ -90,6 +90,8 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
       <p>月のクレーター、木星や土星、二重星、星雲・星団などです。季節や時刻、月明かり、天候で見やすい天体が変わりますので、当日のご案内をご確認ください。</p>
     </section>
 
+    <NichiharanSection />
+
     <section id="more" class="prose">
       <h2>もっと詳しく</h2>
       <ul>
@@ -123,10 +125,6 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
     align-items: center;
     margin-top: var(--space-8);
   }
-  .about-lead .mascot-spot {
-    margin: 0;
-    justify-self: center;
-  }
   .photo {
     margin: var(--space-8) 0;
   }
@@ -155,9 +153,6 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
   @media (max-width: 860px) {
     .about-lead {
       grid-template-columns: 1fr;
-    }
-    .about-lead .mascot-spot {
-      justify-self: end;
     }
   }
 </style>

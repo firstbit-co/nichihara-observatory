@@ -1,12 +1,10 @@
 ---
 /**
- * マスコット「にちはらん」の説明ページ。トップでは小さく置くだけにして、説明はここにまとめる。
+ * 「天文台について」(/about/)の中の、キャラクター「にちはらん」の紹介。サイトのほかの場所には置かない。
  * 画像は新田さん提供の原画(docs/mascot/nichiharan/reference-v2.webp)から切り出したもの。形は変えず、帽子のスリットに星を描き足し、スカーフを天文台の黄色にする。
  * 作り直し:python3 docs/mascot/nichiharan-from-reference.py public/images/nichiharan
  * TODO: 町の公式キャラクターとして制定される前に公開する場合は「キャラクター案」と表記する。
  */
-import BaseLayout from '../layouts/BaseLayout.astro';
-
 // プロフィール(口ぐせは新田さんの指定。ほかは docs/06-mascot.md の設定をもとにした案)
 const profile = [
   ['なまえ', 'にちはらん'],
@@ -33,27 +31,22 @@ const poses = [
 ];
 ---
 
-<BaseLayout title="にちはらん" description="日原天文台のキャラクター「にちはらん」の紹介です。">
-  <header class="page-header">
-    <div class="container">
-      <h1>にちはらん</h1>
-      <p>日原天文台のキャラクターです。</p>
-    </div>
-  </header>
+<section id="nichiharan">
+  <h2>キャラクター「にちはらん」</h2>
+  <p>日原天文台のキャラクターです。</p>
 
-  <div class="container">
-    <section class="profile">
+    <div class="profile">
       <img class="profile__img" src="/images/nichiharan/wave.png" alt="手を振るにちはらん" width="600" height="640">
       <div class="prose">
-        <h2>どんな子?</h2>
+        <h3>どんな子?</h3>
         <p>ドームのぼうしをかぶった、天文台の子です。ぼうしのスリットの中には、いつも星が光っています。</p>
         <p>昼はおひるね。夜になると、望遠鏡のところでみんなを待っています。</p>
         <p class="catch">「いっしょに、宇宙をのぞこ!」</p>
       </div>
-    </section>
+    </div>
 
-    <section class="prose">
-      <h2>プロフィール</h2>
+    <div class="prose nichiharan-block">
+      <h3>プロフィール</h3>
       <table class="table profile-table">
         <tbody>
           {profile.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
@@ -62,27 +55,27 @@ const poses = [
       </table>
       <p>天文台で星が見られるかどうかは、その日の空しだい。だから、にちはらんは毎日空を見上げて、つい「今日は晴れるかなぁ」とつぶやいてしまいます。</p>
       <p>生まれた1985年は、ハレー彗星が地球に近づき、日本じゅうで星空への関心が高まった年。にちはらんは、その次にハレー彗星がやってくる2061年を、いまから楽しみにしています。</p>
-    </section>
+    </div>
 
-    <section class="prose">
-      <h2>にちはらんの一日</h2>
+    <div class="prose nichiharan-block">
+      <h3>にちはらんの一日</h3>
       <ol class="day">
         {day.map((d) => <li><span class="day__time">{d.time}</span><p>{d.text}</p></li>)}
       </ol>
-    </section>
+    </div>
 
-    <section>
-      <h2>かたちのひみつ</h2>
+    <div class="nichiharan-block">
+      <h3>かたちのひみつ</h3>
       <ul class="prose">
         <li>ドームのぼうし … 天文台のドームです。</li>
         <li>スリットの星 … ドームのスリットから見える星空です。</li>
         <li>黄色のスカーフ … 日原天文台の建物の色です。</li>
         <li>胸の金の星 … みんなが見上げる星です。</li>
       </ul>
-    </section>
+    </div>
 
-    <section>
-      <h2>いろいろなにちはらん</h2>
+    <div class="nichiharan-block">
+      <h3>いろいろなにちはらん</h3>
       <ul class="poses">
         {
           poses.map((p) => (
@@ -93,11 +86,13 @@ const poses = [
           ))
         }
       </ul>
-    </section>
-  </div>
-</BaseLayout>
+    </div>
+</section>
 
 <style>
+  .nichiharan-block {
+    margin-top: var(--space-8);
+  }
   .profile {
     display: grid;
     grid-template-columns: 240px minmax(0, 1fr);
@@ -112,7 +107,7 @@ const poses = [
     background: #fdfcf5;
     border-radius: 24px;
   }
-  .profile h2 {
+  .profile h3 {
     margin-top: 0;
   }
   .catch {

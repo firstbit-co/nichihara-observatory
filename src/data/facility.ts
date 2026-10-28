@@ -219,15 +219,14 @@ export const NAV = [
   { href: '/about/', label: '天文台について' },
   { href: '/guide/', label: '利用案内' },
   { href: '/facilities/', label: '施設' },
-  { href: '/access/', label: 'アクセス' },
   { href: '/sorabe/', label: '宿泊' },
   { href: '/around/', label: '津和野観光' },
+  { href: '/access/', label: 'アクセス' },
   { href: '/news/', label: 'ニュース' },
   { href: '/contact/', label: 'お問い合わせ' },
 ] as const;
 
 export const FOOTER_LINKS = [
-  { href: '/nichiharan/', label: 'にちはらん' },
   { href: '/events/', label: 'イベント' },
   { href: '/gallery/', label: '写真' },
   { href: '/learn/', label: '学習資料' },
