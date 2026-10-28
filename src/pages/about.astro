@@ -21,19 +21,6 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
   </header>
 
   <div class="container">
-    <section class="about-lead">
-      <div class="prose">
-        <p class="lead">日原(にちはら)天文台は、島根県津和野町の枕瀬山(まくらせやま)山頂、標高255mにある公開天文台です。1985年の開台以来、口径75cmの反射望遠鏡で、どなたでも星をのぞくことができます。この望遠鏡には、のちの「すばる望遠鏡」へ続く、日本の大型望遠鏡開発の歴史が刻まれています。</p>
-      </div>
-    </section>
-
-    <div class="prose">
-      <figure class="photo">
-        <img src="/images/dome-exterior.jpg" alt="枕瀬山の山頂に立つ日原天文台。青空の下、銀色のドームと黄色い建物の前に「日原天文台」の看板が立っている" width="1536" height="1024">
-        <figcaption>枕瀬山の山頂に立つ日原天文台。</figcaption>
-      </figure>
-    </div>
-
     <section id="history" class="prose">
       <h2>日原天文台の歴史</h2>
       <p>日原天文台は1985年(昭和60年)8月、当時の日原町が枕瀬山森林公園の山頂に開いた天文台です。ハレー彗星の接近で、全国で星空への関心が高まった年でした。</p>
@@ -118,13 +105,6 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
 </BaseLayout>
 
 <style>
-  .about-lead {
-    display: grid;
-    grid-template-columns: minmax(0, 44rem) 1fr;
-    gap: var(--space-8);
-    align-items: center;
-    margin-top: var(--space-8);
-  }
   .photo {
     margin: var(--space-8) 0;
   }
@@ -139,20 +119,11 @@ const history = HISTORY.filter((h) => import.meta.env.DEV || h.text.verified);
     font-size: 0.85rem;
     color: var(--color-text-muted);
   }
-  .lead {
-    font-size: 1.1rem;
-    line-height: 2;
-  }
   h3 {
     margin-top: var(--space-8);
   }
   .sources {
     font-size: 0.85rem;
     color: var(--color-text-muted);
-  }
-  @media (max-width: 860px) {
-    .about-lead {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

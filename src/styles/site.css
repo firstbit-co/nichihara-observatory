@@ -374,3 +374,33 @@
   margin: var(--space-4) 0 0;
   text-align: right;
 }
+
+/* トップ:日原天文台について */
+.intro-body {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+.intro-body p {
+  margin: 0;
+  line-height: 1.9;
+}
+.intro-photo {
+  margin: 0;
+}
+.intro-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+.intro-photo figcaption {
+  margin-top: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+@media (min-width: 768px) {
+  .intro-body {
+    grid-template-columns: 1fr 1fr;
+  }
+}

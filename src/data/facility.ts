@@ -229,7 +229,4 @@ export const NAV = [
 export const FOOTER_LINKS = [
   { href: '/events/', label: 'イベント' },
   { href: '/gallery/', label: '写真' },
-  { href: '/learn/', label: '学習資料' },
-  { href: '/friends/', label: '友の会' },
-  { href: '/privacy/', label: 'プライバシーポリシー' },
 ] as const;
