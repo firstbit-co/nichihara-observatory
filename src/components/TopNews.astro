@@ -1,0 +1,30 @@
+---
+/**
+ * トップの「ニュース」。スプレッドシートから取り込んだ最新のニュースを並べ、一覧(/news/)へつなぐ。
+ * 中身はシートの更新で変わるので、表記の検査(check-copy)の確定稿との比較からは外している。
+ */
+import { formatDate, getNews } from '../lib/content';
+
+const LIMIT = 5;
+const news = await getNews(LIMIT);
+---
+
+<section class="section" id="news">
+  <div class="wrap">
+    <h2>ニュース</h2>
+    {news.length === 0 && <p class="muted">現在ニュースはありません。</p>}
+    <ul class="list">
+      {
+        news.map((n) => (
+          <li>
+            <time datetime={n.data.date.toISOString()}>{formatDate(n.data.date)}</time>
+            <span class="tag">{n.data.category}</span>
+            <a href={`/news/${n.id}/`}>{n.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="news-more"><a href="/news/">ニュース一覧へ</a></p>
+  </div>
+</section>
+

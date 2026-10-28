@@ -222,7 +222,7 @@ export const NAV = [
   { href: '/access/', label: 'アクセス' },
   { href: '/sorabe/', label: '宿泊' },
   { href: '/around/', label: '津和野観光' },
-  { href: '/news/', label: 'お知らせ' },
+  { href: '/news/', label: 'ニュース' },
   { href: '/contact/', label: 'お問い合わせ' },
 ] as const;
 

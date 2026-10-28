@@ -10,7 +10,7 @@ const notice = (await getNews()).find((n) => n.data.important);
 
 {
   notice && (
-    <div class="notice-bar" role="region" aria-label="重要なお知らせ">
+    <div class="notice-bar" role="region" aria-label="重要なニュース">
       <div class="notice-bar__inner">
         <span class="notice-bar__label">重要</span>
         <a href={`/news/${notice.id}/`}>{notice.data.title}</a>

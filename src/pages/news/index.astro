@@ -5,15 +5,15 @@ import { formatDate, getNews } from '../../lib/content';
 const news = await getNews();
 ---
 
-<BaseLayout title="お知らせ" description="日原天文台からのお知らせ。">
+<BaseLayout title="ニュース" description="日原天文台からのニュース。">
   <header class="page-header">
     <div class="container">
-      <h1>お知らせ</h1>
+      <h1>ニュース</h1>
     </div>
   </header>
 
   <div class="container">
-    {news.length === 0 && <p class="muted">現在お知らせはありません。</p>}
+    {news.length === 0 && <p class="muted">現在ニュースはありません。</p>}
     <ul class="list">
       {
         news.map((n) => (

@@ -7,6 +7,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CALENDAR_URL, CLOSED, FEES, HOURS, MAP_EMBED_URL, MAP_LINK_URL, RECEPTION, SORABE_URL, range, yen } from '../data/facility';
 import TodaySky from '../components/TodaySky.astro';
+import TopNews from '../components/TopNews.astro';
 ---
 
 <BaseLayout>
@@ -47,6 +48,8 @@ import TodaySky from '../components/TodaySky.astro';
 
 
   <TodaySky />
+
+  <TopNews />
 
   <section class="section" id="flow">
     <div class="wrap">
