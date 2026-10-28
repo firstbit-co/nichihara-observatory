@@ -379,11 +379,19 @@
 .intro-body {
   display: grid;
   gap: var(--space-6);
-  align-items: center;
+  align-items: start;
 }
-.intro-body p {
-  margin: 0;
+.intro-text p {
+  margin: 0 0 var(--space-4);
   line-height: 1.9;
+}
+.intro-text p:last-child {
+  margin-bottom: 0;
+}
+.intro-catch {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 .intro-photo {
   margin: 0;
