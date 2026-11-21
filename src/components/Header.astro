@@ -1,28 +1,49 @@
 ---
 import { NAV, SITE } from '../data/facility';
+import { LANGS, STRINGS, type Lang } from '../data/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'ja' } = Astro.props;
+const t = lang === 'ja' ? null : STRINGS[lang];
+// 英語・フランス語のページでは、メニューはページ内の見出しへのリンク
+const nav = t ? t.nav.map(([href, label]) => ({ href, label })) : NAV;
+const home = t ? LANGS.find((l) => l.lang === lang)!.href : '/';
 
 // GitHub Pages のサブパス配信(BASE_PATH)でも同じ比較ができるよう base を外す
 const current = '/' + Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
 ---
 
 <header class="site-header">
+  <div class="container lang-switch" aria-label={t ? t.langLabel : '言語'} role="group">
+    {
+      LANGS.map((l) =>
+        l.lang === lang ? (
+          <span aria-current="true">{l.label}</span>
+        ) : (
+          <a href={l.href} lang={l.lang} hreflang={l.lang}>{l.label}</a>
+        ),
+      )
+    }
+  </div>
   <div class="container site-header__inner">
-    <a class="site-header__brand" href="/">
-      <span class="site-header__name">{SITE.name}</span>
-      <span class="site-header__tagline">{SITE.tagline}</span>
+    <a class="site-header__brand" href={home}>
+      <span class="site-header__name">{t ? t.name : SITE.name}</span>
+      <span class="site-header__tagline">{t ? t.tagline : SITE.tagline}</span>
     </a>
 
     <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span class="visually-hidden">メニューを開く</span>
+      <span class="visually-hidden">{t ? t.menu : 'メニューを開く'}</span>
       <span aria-hidden="true">☰</span>
     </button>
 
-    <nav id="site-nav" class="site-header__nav" aria-label="メインメニュー">
+    <nav id="site-nav" class="site-header__nav" aria-label={t ? 'Menu' : 'メインメニュー'}>
       <ul>
         {
-          NAV.map((item) => (
+          nav.map((item) => (
             <li>
-              <a href={item.href} aria-current={current.startsWith(item.href) ? 'page' : undefined}>
+              <a href={item.href} aria-current={!t && current.startsWith(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>
@@ -30,7 +51,7 @@ const current = '/' + Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
         }
         <li>
           <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
-            赤色ナイトモード
+            {t ? t.nightMode : '赤色ナイトモード'}
           </button>
         </li>
       </ul>
@@ -143,6 +164,30 @@ const current = '/' + Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
     font-size: 0.8rem;
     min-height: 36px;
     cursor: pointer;
+  }
+  .lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--space-1);
+    padding-top: var(--space-1);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .lang-switch a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  .lang-switch a:hover {
+    color: var(--color-text);
+  }
+  .lang-switch > * + *::before {
+    content: '/';
+    margin-right: var(--space-1);
+    color: var(--color-text-muted);
+  }
+  .lang-switch span[aria-current] {
+    color: var(--color-accent);
   }
   .theme-toggle[aria-pressed='true'] {
     background: #3a0000;

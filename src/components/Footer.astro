@@ -1,6 +1,14 @@
 ---
 import { CONTACT, FOOTER_LINKS, NAV, SITE } from '../data/facility';
 import Verify from './Verify.astro';
+import { LANGS, STRINGS, type Lang } from '../data/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'ja' } = Astro.props;
+const t = lang === 'ja' ? null : STRINGS[lang];
+const links = t ? [...t.nav.map(([href, label]) => ({ href, label })), ...LANGS.filter((l) => l.lang !== lang)] : [...NAV, ...FOOTER_LINKS];
 
 const year = new Date().getFullYear();
 ---
@@ -8,19 +16,28 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div>
-      <p class="site-footer__name">{SITE.name}</p>
-      <address>
-        {CONTACT.postalCode.value && <>〒{CONTACT.postalCode.value} </>}<Verify fact={CONTACT.address} /><br />
-        TEL <a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}><Verify fact={CONTACT.tel} /></a>
-      </address>
+      <p class="site-footer__name">{t ? t.name : SITE.name}</p>
+      {
+        t ? (
+          <address>
+            {t.address}<br />
+            TEL <a href={`tel:+81${CONTACT.tel.value.replaceAll('-', '').slice(1)}`}>+81-{CONTACT.tel.value.slice(1)}</a>
+          </address>
+        ) : (
+          <address>
+            {CONTACT.postalCode.value && <>〒{CONTACT.postalCode.value} </>}<Verify fact={CONTACT.address} /><br />
+            TEL <a href={`tel:${CONTACT.tel.value.replaceAll('-', '')}`}><Verify fact={CONTACT.tel} /></a>
+          </address>
+        )
+      }
     </div>
-    <nav aria-label="フッターメニュー">
+    <nav aria-label={t ? t.footerNav : 'フッターメニュー'}>
       <ul>
-        {[...NAV, ...FOOTER_LINKS].map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {links.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       </ul>
     </nav>
   </div>
-  <p class="container site-footer__copy">© {year} {SITE.name}</p>
+  <p class="container site-footer__copy">© {year} {t ? t.name : SITE.name}</p>
 </footer>
 
 <style>

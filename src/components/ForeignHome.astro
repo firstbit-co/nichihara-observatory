@@ -1,0 +1,127 @@
+---
+/**
+ * 英語・フランス語のページ(/en/、/fr/)の本文。1ページに来館に必要なことをまとめる。
+ * 文言は src/data/i18n.ts、時間・料金は facility.ts。
+ */
+import { CONTACT, MAP_LINK_URL, SORABE_URL } from '../data/facility';
+import { STRINGS } from '../data/i18n';
+
+interface Props {
+  lang: 'en' | 'fr';
+}
+
+const t = STRINGS[Astro.props.lang];
+---
+
+<section class="stage">
+  <img class="stage-bg" src="/images/dome-night.jpg" alt="" width="1536" height="1024" fetchpriority="high">
+  <div class="stage-copy">
+    <h1>{t.name}</h1>
+    <p class="stage-lead">{t.heroLead}</p>
+    <p>{t.heroText}</p>
+    <div class="actions">
+      <a class="button button-gold" href="#visit">{t.visitTitle}</a>
+      <a class="button button-quiet" href="#access">{t.accessTitle}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <h2>{t.aboutTitle}</h2>
+    <div class="intro-body">
+      <div class="intro-text">
+        <p class="intro-catch">{t.catch}</p>
+        {t.about.map((p) => <p>{p}</p>)}
+      </div>
+      <figure class="intro-photo">
+        <img src="/images/dome-exterior.jpg" alt="" width="1536" height="1024" loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="visit">
+  <div class="wrap prose">
+    <h2>{t.visitTitle}</h2>
+
+    <h3>{t.daysTitle}</h3>
+    <p>{t.days}</p>
+
+    <h3>{t.hoursTitle}</h3>
+    <div class="table-wrap">
+      <table class="table">
+        <tbody>
+          {t.hours.map(([k, time, note]) => <tr><th scope="row">{k}</th><td>{time}<br><span class="muted">{note}</span></td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p>{t.hoursNote}</p>
+
+    <h3>{t.feesTitle}</h3>
+    <div class="table-wrap">
+      <table class="table table--stack">
+        <thead>
+          <tr>{t.feesHead.map((h) => <th scope="col">{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {t.fees.map(([k, a, c]) => <tr><th scope="row">{k}</th><td data-label={t.feesHead[1]}>{a}</td><td data-label={t.feesHead[2]}>{c}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p>{t.feesNote}</p>
+
+    <h3>{t.howTitle}</h3>
+    <ul>{t.how.map((p) => <li>{p}</li>)}</ul>
+
+    <h3>{t.tipsTitle}</h3>
+    <ul>{t.tips.map((p) => <li>{p}</li>)}</ul>
+  </div>
+</section>
+
+<section class="section" id="telescope">
+  <div class="wrap prose">
+    <h2>{t.telescopeTitle}</h2>
+    <figure class="intro-photo">
+      <img src="/images/telescope-75cm.jpg" alt="" width="1536" height="1024" loading="lazy">
+    </figure>
+    <div class="table-wrap">
+      <table class="table">
+        <tbody>
+          {t.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    {t.telescope.map((p) => <p>{p}</p>)}
+  </div>
+</section>
+
+<section class="section" id="facilities">
+  <div class="wrap prose">
+    <h2>{t.facilitiesTitle}</h2>
+    {t.facilities.map(([name, text]) => <><h3>{name}</h3><p>{text}</p></>)}
+  </div>
+</section>
+
+<section class="section" id="stay">
+  <div class="wrap prose">
+    <h2>{t.stayTitle}</h2>
+    <p>{t.stay}</p>
+    <p><a href={SORABE_URL} rel="noopener" target="_blank">{t.stayLink}</a></p>
+    <p>{t.camp}</p>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="wrap prose">
+    <h2>{t.accessTitle}</h2>
+    <p>{t.address}</p>
+    <p><a class="button button--ghost" href={MAP_LINK_URL} rel="noopener" target="_blank">{t.mapLink}</a></p>
+    <p>{t.accessTrain}</p>
+    <p>{t.accessCar}</p>
+
+    <h2>{t.contactTitle}</h2>
+    <p>{t.tel}: <a href={`tel:+81${CONTACT.tel.value.replaceAll('-', '').slice(1)}`}>+81-{CONTACT.tel.value.slice(1)}</a></p>
+    <p class="muted">{t.japaneseOnly} <a href="/">{t.toJapanese}</a></p>
+  </div>
+</section>

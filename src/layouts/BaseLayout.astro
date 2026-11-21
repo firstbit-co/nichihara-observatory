@@ -5,18 +5,23 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import NoticeBar from '../components/NoticeBar.astro';
 import { CONTACT, SITE } from '../data/facility';
+import { LANGS, STRINGS } from '../data/i18n';
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: 'ja' | 'en';
+  lang?: 'ja' | 'en' | 'fr';
   /** ページ固有の構造化データ(Event など)を追加するとき */
   jsonLd?: Record<string, unknown>;
 }
 
 const { title, description = SITE.description, lang = 'ja', jsonLd } = Astro.props;
-const fullTitle = title ? `${title}|${SITE.name}` : `${SITE.name}|${SITE.tagline}`;
+// 英語・フランス語のページは title をそのまま使う
+const fullTitle = lang !== 'ja' && title ? title : title ? `${title}|${SITE.name}` : `${SITE.name}|${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// トップと英語・フランス語のページは互いに言語違いのページとして知らせる
+const path = '/' + Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
+const alternates = LANGS.some((l) => l.href === path) ? LANGS : [];
 // 公開日まではインデックスさせない(.env.example 参照)
 const allowIndex = import.meta.env.PUBLIC_ALLOW_INDEX === 'true';
 
@@ -52,11 +57,12 @@ const siteJsonLd = {
     <meta name="robots" content={allowIndex ? 'index,follow' : 'noindex,nofollow'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {alternates.map((l) => <link rel="alternate" hreflang={l.lang} href={new URL(import.meta.env.BASE_URL.replace(/\/$/, '') + l.href, Astro.site)} />)}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#0b1020" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_US'} />
+    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : STRINGS[lang].locale} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -76,12 +82,12 @@ const siteJsonLd = {
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">本文へスキップ</a>
-    <Header />
-    <NoticeBar />
+    <a class="skip-link" href="#main">{lang === 'ja' ? '本文へスキップ' : STRINGS[lang].skip}</a>
+    <Header lang={lang} />
+    {lang === 'ja' && <NoticeBar />}
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

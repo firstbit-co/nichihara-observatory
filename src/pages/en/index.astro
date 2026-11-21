@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ForeignHome from '../../components/ForeignHome.astro';
+import { STRINGS } from '../../data/i18n';
+
+const t = STRINGS.en;
+---
+
+<BaseLayout lang="en" title={t.title} description={t.description}>
+  <ForeignHome lang="en" />
+</BaseLayout>
